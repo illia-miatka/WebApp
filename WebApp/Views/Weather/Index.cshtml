@@ -1,0 +1,38 @@
+﻿@model List<WebApp.Models.Weather.City>
+
+@{
+    ViewBag.Title = "Weather";
+}
+
+<h2>Weather</h2>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            City
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        <td>
+            @Html.ActionLink("Day", "GetWeatherDay", new { city = item.name}) |
+            @Html.ActionLink("3 Days", "GetWeather3Days", new { city = item.name}) |
+            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = item.name})
+        </td>
+    </tr>
+}
+</table>
+
+
+<div>
+    @using (Html.BeginForm("GetCity", "Weather", FormMethod.Post))
+    {
+        @Html.Label("Search")
+        @Html.TextBox("txtName")
+    }
+</div>

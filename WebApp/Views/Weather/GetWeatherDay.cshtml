@@ -1,0 +1,140 @@
+﻿@model WebApp.Models.WeatherNow.RootObject
+
+@{
+    ViewBag.Title = "Weather";
+}
+
+<h2>Weather</h2>
+<p>
+    @Html.ActionLink("Back to List", "Index")</p>
+</p>
+<hr />
+@{ if (Model.errorMsg == null && Model.cod != 404)
+    {
+    <div>
+        <h3>
+        <img src=@WebApp.Services.GetWeatherService.GetFlag(Model.sys.country) height="25" width="45">
+        @Model.name.ToString()
+        </h3>
+        <h1>@Html.DisplayFor(model => model.main.temp)&degC</h1>
+         @foreach (var p in Model.weather)
+        {
+            <h4><img src=@WebApp.Services.GetWeatherService.GetWeatherIco(p.icon)> @p.main       
+                <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Weather-Sunrise-icon.png" height="30" width="30">
+                @Model.datetime(@Model.sys.sunrise).ToString("t")
+                <img src="http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Sunset-icon.png" height="30" width="30">
+                @Model.datetime(@Model.sys.sunset).ToString("t")
+            </h4>
+        }
+        <hr />
+                
+        <h4>Main</h4>
+         <dl class="dl-horizontal">
+            
+            <dt>
+                Temperature: 
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.main.temp)&degC<br>
+            </dd>
+
+             <dt>
+                 Min:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.main.temp_min)&degC
+             </dd>
+
+             <dt>
+                 Max:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.main.temp_max)&degC
+             </dd>
+
+             <dt>
+                 Humidity:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.main.humidity) %
+             </dd>
+
+             <dt>
+                 Pressure:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.main.pressure) hPa
+             </dd>  
+
+             <dt>
+                 Wind speed:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.wind.speed) meter/sec
+             </dd> 
+
+             <dt>
+                 Wind direction:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.wind.deg) degrees
+             </dd> 
+             
+             <dt>
+                 Clouds:
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.clouds.all) %
+             </dd> 
+        </dl>
+<hr />
+        <h4>Other</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                ID:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.id)
+            </dd> 
+            <dt>
+                Coordinates:
+            </dt>
+
+            <dd>
+                longitude - @Html.DisplayFor(model => model.coord.lat) <br>
+                latitude - @Html.DisplayFor(model => model.coord.lat)
+            </dd> 
+            <dt>
+                Country:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sys.country)
+            </dd> 
+            <dt>
+                Message:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sys.message)
+            </dd> 
+</div>
+    }
+    else
+    {
+        <div>
+            <h4>ERROR!</h4>
+            <hr />
+            <h6>Have some problems... @Model.errorMsg</h6>
+        </div>
+    }
+}

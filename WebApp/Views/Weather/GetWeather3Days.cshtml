@@ -1,0 +1,194 @@
+﻿@model WebApp.Models.Weather.RootObject
+
+@{
+    ViewBag.Title = "3 Days Weather Forecast";
+}
+
+<h2>3 Days Weather Forecast</h2>
+<hr />
+@{ if (Model.errorMsg == null && Model.cod != 404)
+    {
+    <div>
+        <h3><img src=@WebApp.Services.GetWeatherService.GetFlag(Model.city.country) height="25" width="45"> @Model.city.name.ToString()</h3>
+        <p>@Html.ActionLink("Back to List", "Index")</p>
+        <hr />        
+        <table margin="auto" border="0">
+            <tr>
+                <th></th>
+                @foreach (var p in Model.list)
+                {
+                    <th>@p.datetime().ToString("d")</th>
+                }
+            </tr>
+            <tr>
+                <th></th>
+                @foreach (var p in Model.list)
+                {
+                    <th>@p.datetime().DayOfWeek</th>
+                }
+            </tr>
+            <tr>
+                <td></td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @foreach (var o in p.weather)
+                        {
+                            @o.main<br>
+                            <img src= @WebApp.Services.GetWeatherService.GetWeatherIco(o.icon)>
+                        }
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                     Day
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.day&deg
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Min
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.min&deg
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Max
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.max&deg
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Eve
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.eve&deg
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Morning
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.morn&deg
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Night
+                </td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.temp.night&deg
+                    </td>
+                }
+            </tr>
+
+            <tr>
+                <td></td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        ------------
+                    </td>
+                }
+            </tr>
+
+            <tr>
+                <td>Cloudiness</td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.clouds
+                    </td>
+                }
+            </tr>
+        
+            <tr>
+                <td>Humidity</td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.humidity %
+                    </td>
+                }
+            </tr>
+
+            <tr>
+                <td>Pressure</td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.pressure hPa
+                    </td>
+                }
+            </tr>
+
+            <tr>
+                <td>Rain</td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.rain
+                    </td>
+                }
+            </tr>
+
+            <tr>
+                <td>Speed</td>
+                @foreach (var p in Model.list)
+                {
+                    <td>
+                        @p.speed mps
+                    </td>
+                }
+            </tr>
+        </table>
+        <p>
+            <b>ID:</b> @Model.city.id
+        </p>
+        <p>
+            <b>Country:</b> @Model.city.country
+        </p>
+        <p>
+            <b>Population:</b> @Model.city.population
+        </p>
+        <p>
+            <b>Coordinates:</b> longitude - @Model.city.coord.lon; latitude - @Model.city.coord.lat
+        </p>
+        <hr />
+    </div>
+    }
+    else
+    {
+        <div>
+            <h4>ERROR!</h4>
+            <p>@Html.ActionLink("Back to List", "Index")</p>
+            <hr />
+            <h6>Have some problems... @Model.errorMsg</h6>
+        </div>
+    }
+}

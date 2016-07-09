@@ -9,7 +9,7 @@
 @{ if (Model.errorMsg == null && Model.cod != 404)
     {
     <div>
-        <h3><img src=@WebApp.Services.GetWeatherService.GetFlag(Model.city.country) height="25" width="45"> @Model.city.name.ToString()</h3>
+        <h3><img src=@Model.city.flagURL height="25" width="45"> @Model.city.name.ToString()</h3>
         <p>@Html.ActionLink("Back to List", "Index")</p>
         <hr />        
         <table margin="auto" border="0">
@@ -35,7 +35,7 @@
                         @foreach (var o in p.weather)
                         {
                             @o.main<br>
-                            <img src= @WebApp.Services.GetWeatherService.GetWeatherIco(o.icon)>
+                            <img src= @o.icoURL>
                         }
                     </td>
                 }

@@ -5,27 +5,27 @@
 }
 
 <h2>Weather</h2>
-<p>
-    @Html.ActionLink("Back to List", "Index")</p>
-</p>
 <hr />
 @{ if (Model.errorMsg == null && Model.cod != 404)
     {
     <div>
         <h3>
-        <img src=@WebApp.Services.GetWeatherService.GetFlag(Model.sys.country) height="25" width="45">
+        <img src=@Model.sys.flagURL height="25" width="45">
         @Model.name.ToString()
         </h3>
         <h1>@Html.DisplayFor(model => model.main.temp)&degC</h1>
          @foreach (var p in Model.weather)
         {
-            <h4><img src=@WebApp.Services.GetWeatherService.GetWeatherIco(p.icon)> @p.main       
+            <h4>@foreach (var k in Model.weather)
+                { <img src=@k.icoURL> }
+                @p.main       
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Weather-Sunrise-icon.png" height="30" width="30">
                 @Model.datetime(@Model.sys.sunrise).ToString("t")
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Sunset-icon.png" height="30" width="30">
                 @Model.datetime(@Model.sys.sunset).ToString("t")
             </h4>
         }
+        <p>@Html.ActionLink("Back to List", "Index")</p>
         <hr />
                 
         <h4>Main</h4>
@@ -127,12 +127,14 @@
             <dd>
                 @Html.DisplayFor(model => model.sys.message)
             </dd> 
+        </dl>
 </div>
     }
     else
     {
         <div>
             <h4>ERROR!</h4>
+            <p>@Html.ActionLink("Back to List", "Index")</p>
             <hr />
             <h6>Have some problems... @Model.errorMsg</h6>
         </div>

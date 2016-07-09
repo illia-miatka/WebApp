@@ -17,6 +17,7 @@ namespace WebApp.Models.WeatherNow
         public string main { get; set; }
         public string description { get; set; }
         public string icon { get; set; }
+        public string icoURL { get; set; }
     }
 
     public class Main
@@ -47,6 +48,7 @@ namespace WebApp.Models.WeatherNow
         public string country { get; set; }
         public int sunrise { get; set; }
         public int sunset { get; set; }
+        public string flagURL { get; set; }
     }
 
     public class RootObject
@@ -70,7 +72,6 @@ namespace WebApp.Models.WeatherNow
             dtDateTime = dtDateTime.AddSeconds(date).ToLocalTime();
             return dtDateTime;
         }
-
     }
 
 }

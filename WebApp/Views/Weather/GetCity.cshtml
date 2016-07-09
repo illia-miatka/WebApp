@@ -4,6 +4,11 @@
 }
 <h2>City Search</h2>
 <p>@Html.ActionLink("Back to List", "Index")</p>
+@{if (Model.name == "No City!" || Model.name == "Bad city!")
+    { <h4>Error! No city or bad city...</h4> }
+    else
+    {
+
 <table class="table">
     <tr>
         <th>
@@ -21,12 +26,14 @@
         </td>
     </tr>
 </table>
+        }
+    }
 
 <div>
     @using (Html.BeginForm("GetCity", "Weather", FormMethod.Post))
     {
-        @Html.Label("Search")
-        @Html.TextBox("txtName")
+        @Html.Label("Search: ")
+        @Html.TextBox("txtName",null, new { @style = "width: 300px; color: black;" })
     }
 </div>
 

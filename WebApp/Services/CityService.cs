@@ -8,7 +8,13 @@ using System.Web.Mvc;
 
 namespace WebApp.Services
 {
-    public class CityService
+    public interface ICity
+    {
+        List<City> GetAll();
+        City GetNew();
+    }
+
+    public class CityService : ICity
     {
         private static List<City> cityList;
         
@@ -21,6 +27,9 @@ namespace WebApp.Services
             cityList.Add(new City { name = "Kharkiv" });
             cityList.Add(new City { name = "Odessa" });
         }
+
+        public City GetNew()
+        { return new City(); }
 
         public List<City> GetAll()
         {

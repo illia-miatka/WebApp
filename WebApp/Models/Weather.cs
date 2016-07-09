@@ -18,6 +18,7 @@ namespace WebApp.Models.Weather
         public Coord coord { get; set; }
         public string country { get; set; }
         public int population { get; set; }
+        public string flagURL { get; set; }
     }
 
     public class Temp
@@ -36,7 +37,8 @@ namespace WebApp.Models.Weather
         public string main { get; set; }
         public string description { get; set; }
         public string icon { get; set; }
-       
+        public string icoURL { get; set; }
+
     }
 
     public class List

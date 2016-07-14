@@ -4,7 +4,7 @@
 }
 <h2><img src="https://www.mikeafford.com/store/store-images/tv03_example_light_rain_showers.png" width="50" height="50">City Search</h2>
 <p>@Html.ActionLink("Back to List", "Index")</p>
-@{if (Model.name == "No City!" || Model.name == "Bad city!")
+@{if (Model.Name == "No City!" || Model.Name == "Bad city!")
     { <h4>Error! No city or bad city...</h4> }
     else
     {
@@ -18,11 +18,11 @@
     </tr>
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.name)
+            @Html.DisplayFor(modelItem => modelItem.Name)
         <td>
-            @Html.ActionLink("Day", "GetWeatherDay", new { city = Model.name }) |
-            @Html.ActionLink("3 Days", "GetWeather3Days", new { city = Model.name }) |
-            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = Model.name })
+            @Html.ActionLink("Day", "GetWeatherDay", new { city = Model.Name }) |
+            @Html.ActionLink("3 Days", "GetWeather3Days", new { city = Model.Name }) |
+            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = Model.Name })
         </td>
     </tr>
 </table>

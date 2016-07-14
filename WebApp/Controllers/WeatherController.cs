@@ -50,7 +50,7 @@ namespace WebApp.Controllers
             //var city = new Models.Weather.City();
             string name = Form["txtName"];
             var city = cityList.GetNew();
-            city.name = getWeather.CheckCity(name);
+            city.Name = getWeather.CheckCity(name);
             return View(city);
         }
     }

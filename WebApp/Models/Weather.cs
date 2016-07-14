@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Web;
 
@@ -7,67 +8,101 @@ namespace WebApp.Models.Weather
 {
     public class Coord
     {
-        public double lon { get; set; }
-        public double lat { get; set; }
+        [JsonProperty("lon")]
+        public double Lon { get; set; }
+        [JsonProperty("lat")]
+        public double Lat { get; set; }
     }
 
     public class City
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public Coord coord { get; set; }
-        public string country { get; set; }
-        public int population { get; set; }
-        public string flagURL { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("coord")]
+        public Coord Coord { get; set; }
+        [JsonProperty("country")]
+        public string Country { get; set; }
+        [JsonProperty("population")]
+        public int Population { get; set; }
+        [JsonProperty("flagURL")]
+        public string FlagURL { get; set; }
     }
 
     public class Temp
     {
-        public double day { get; set; }
-        public double min { get; set; }
-        public double max { get; set; }
-        public double night { get; set; }
-        public double eve { get; set; }
-        public double morn { get; set; }
+        [JsonProperty("day")]
+        public double Day { get; set; }
+        [JsonProperty("min")]
+        public double Min { get; set; }
+        [JsonProperty("max")]
+        public double Max { get; set; }
+        [JsonProperty("night")]
+        public double Night { get; set; }
+        [JsonProperty("eve")]
+        public double Eve { get; set; }
+        [JsonProperty("morn")]
+        public double Morn { get; set; }
     }
 
     public class Weather
     {
-        public int id { get; set; }
-        public string main { get; set; }
-        public string description { get; set; }
-        public string icon { get; set; }
-        public string icoURL { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("main")]
+        public string Main { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+        [JsonProperty("icoURL")]
+        public string IcoURL { get; set; }
 
     }
 
     public class List
     {
-        public int dt { get; set; }
-        public Temp temp { get; set; }
-        public double pressure { get; set; }
-        public int humidity { get; set; }
-        public List<Weather> weather { get; set; }
-        public double speed { get; set; }
-        public int deg { get; set; }
-        public int clouds { get; set; }
-        public double rain { get; set; }
+        [JsonProperty("dt")]
+        public int DT { get; set; }
+        [JsonProperty("temp")]
+        public Temp Temp { get; set; }
+        [JsonProperty("pressure")]
+        public double Pressure { get; set; }
+        [JsonProperty("humidity")]
+        public int Humidity { get; set; }
+        [JsonProperty("weather")]
+        public List<Weather> Weather { get; set; }
+        [JsonProperty("speed")]
+        public double Speed { get; set; }
+        [JsonProperty("deg")]
+        public int Deg { get; set; }
+        [JsonProperty("clouds")]
+        public int Clouds { get; set; }
+        [JsonProperty("rain")]
+        public double Rain { get; set; }
         public DateTime datetime()
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(dt).ToLocalTime();
+            dtDateTime = dtDateTime.AddSeconds(DT).ToLocalTime();
             return dtDateTime;
         }
     }
 
     public class RootObject
     {
-        public City city { get; set; }
-        public int cod { get; set; }
-        public double message { get; set; }
-        public int cnt { get; set; }
-        public List<List> list { get; set; }
-        public string errorMsg { get; set; }
+        [JsonProperty("city")]
+        public City City { get; set; }
+        [JsonProperty("cod")]
+        public int Cod { get; set; }
+        [JsonProperty("message")]
+        public double Message { get; set; }
+        [JsonProperty("cnt")]
+        public int Cnt { get; set; }
+        [JsonProperty("list")]
+        public List<List> List { get; set; }
+        [JsonProperty("errorMsg")]
+        public string ErrorMsg { get; set; }
     }
 }

@@ -6,23 +6,23 @@
 
 <h2><img src="https://www.mikeafford.com/store/store-images/tv03_example_light_rain_showers.png" width="50" height="50">Weather</h2>
 <hr />
-@{ if (Model.errorMsg == null && Model.cod != 404)
+@{ if (Model.ErrorMsg == null && Model.Cod != 404)
     {
     <div>
         <h3>
-        <img src=@Model.sys.flagURL height="25" width="45">
-        @Model.name.ToString()
+        <img src=@Model.Sys.FlagURL height="25" width="45">
+        @Model.Name.ToString()
         </h3>
-        <h1>@Html.DisplayFor(model => model.main.temp)&degC</h1>
-         @foreach (var p in Model.weather)
+        <h1>@Html.DisplayFor(model => model.Main.Temp)&degC</h1>
+         @foreach (var p in Model.Weather)
         {
-            <h4>@foreach (var k in Model.weather)
-                { <img src=@k.icoURL> }
-                @p.main       
+            <h4>@foreach (var k in Model.Weather)
+                { <img src=@k.IcoURL> }
+                @p.Main       
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Weather-Sunrise-icon.png" height="30" width="30">
-                @Model.datetime(@Model.sys.sunrise).ToString("t")
+                @Model.datetime(@Model.Sys.Sunrise).ToString("t")
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Sunset-icon.png" height="30" width="30">
-                @Model.datetime(@Model.sys.sunset).ToString("t")
+                @Model.datetime(@Model.Sys.Sunset).ToString("t")
             </h4>
         }
         <p>@Html.ActionLink("Back to List", "Index")</p>
@@ -36,7 +36,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.main.temp)&degC<br>
+                @Html.DisplayFor(model => model.Main.Temp)&degC<br>
             </dd>
 
              <dt>
@@ -44,7 +44,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.main.temp_min)&degC
+                 @Html.DisplayFor(model => model.Main.Temp_min)&degC
              </dd>
 
              <dt>
@@ -52,7 +52,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.main.temp_max)&degC
+                 @Html.DisplayFor(model => model.Main.Temp_max)&degC
              </dd>
 
              <dt>
@@ -60,7 +60,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.main.humidity) %
+                 @Html.DisplayFor(model => model.Main.Humidity) %
              </dd>
 
              <dt>
@@ -68,7 +68,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.main.pressure) hPa
+                 @Html.DisplayFor(model => model.Main.Pressure) hPa
              </dd>  
 
              <dt>
@@ -76,7 +76,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.wind.speed) meter/sec
+                 @Html.DisplayFor(model => model.Wind.Speed) meter/sec
              </dd> 
 
              <dt>
@@ -84,7 +84,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.wind.deg) degrees
+                 @Html.DisplayFor(model => model.Wind.Deg) degrees
              </dd> 
              
              <dt>
@@ -92,7 +92,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.clouds.all) %
+                 @Html.DisplayFor(model => model.Clouds.All) %
              </dd> 
         </dl>
 <hr />
@@ -103,29 +103,29 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.id)
+                @Html.DisplayFor(model => model.Id)
             </dd> 
             <dt>
                 Coordinates:
             </dt>
 
             <dd>
-                longitude - @Html.DisplayFor(model => model.coord.lat) <br>
-                latitude - @Html.DisplayFor(model => model.coord.lat)
+                longitude - @Html.DisplayFor(model => model.Coord.Lat) <br>
+                latitude - @Html.DisplayFor(model => model.Coord.Lat)
             </dd> 
             <dt>
                 Country:
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.sys.country)
+                @Html.DisplayFor(model => model.Sys.Country)
             </dd> 
             <dt>
                 Message:
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.sys.message)
+                @Html.DisplayFor(model => model.Sys.Message)
             </dd> 
         </dl>
 </div>
@@ -136,7 +136,7 @@
             <h4>ERROR!</h4>
             <p>@Html.ActionLink("Back to List", "Index")</p>
             <hr />
-            <h6>Have some problems... @Model.errorMsg</h6>
+            <h6>Have some problems... @Model.ErrorMsg</h6>
         </div>
     }
 }

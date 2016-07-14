@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Web;
 
@@ -7,64 +8,98 @@ namespace WebApp.Models.WeatherNow
 {
     public class Coord
     {
-        public double lon { get; set; }
-        public double lat { get; set; }
+        [JsonProperty("lon")]
+        public double Lon { get; set; }
+        [JsonProperty("lat")]
+        public double Lat { get; set; }
     }
 
     public class Weather
     {
-        public int id { get; set; }
-        public string main { get; set; }
-        public string description { get; set; }
-        public string icon { get; set; }
-        public string icoURL { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("main")]
+        public string Main { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+        [JsonProperty("icoURL")]
+        public string IcoURL { get; set; }
     }
 
     public class Main
     {
-        public double temp { get; set; }
-        public double pressure { get; set; }
-        public double humidity { get; set; }
-        public double temp_min { get; set; }
-        public double temp_max { get; set; }
+        [JsonProperty("temp")]
+        public double Temp { get; set; }
+        [JsonProperty("pressure")]
+        public double Pressure { get; set; }
+        [JsonProperty("humidity")]
+        public double Humidity { get; set; }
+        [JsonProperty("temp_min")]
+        public double Temp_min { get; set; }
+        [JsonProperty("temp_max")]
+        public double Temp_max { get; set; }
     }
 
     public class Wind
     {
-        public double speed { get; set; }
-        public double deg { get; set; }
+        [JsonProperty("speed")]
+        public double Speed { get; set; }
+        [JsonProperty("deg")]
+        public double Deg { get; set; }
     }
 
     public class Clouds
     {
-        public double all { get; set; }
+        [JsonProperty("all")]
+        public double All { get; set; }
     }
 
     public class Sys
     {
-        public int type { get; set; }
-        public int id { get; set; }
-        public double message { get; set; }
-        public string country { get; set; }
-        public int sunrise { get; set; }
-        public int sunset { get; set; }
-        public string flagURL { get; set; }
+        [JsonProperty("type")]
+        public int Type { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("message")]
+        public double Message { get; set; }
+        [JsonProperty("country")]
+        public string Country { get; set; }
+        [JsonProperty("sunrise")]
+        public int Sunrise { get; set; }
+        [JsonProperty("sunset")]
+        public int Sunset { get; set; }
+        [JsonProperty("flagURL")]
+        public string FlagURL { get; set; }
     }
 
     public class RootObject
     {
-        public Coord coord { get; set; }
-        public List<Weather> weather { get; set; }
-        public string @base { get; set; }
-        public Main main { get; set; }
-        public Wind wind { get; set; }
-        public Clouds clouds { get; set; }
-        public int dt { get; set; }
-        public Sys sys { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
-        public int cod { get; set; }
-        public string errorMsg { get; set; }
+        [JsonProperty("coord")]
+        public Coord Coord { get; set; }
+        [JsonProperty("weather")]
+        public List<Weather> Weather { get; set; }
+        [JsonProperty("@base")]
+        public string Base { get; set; }
+        [JsonProperty("main")]
+        public Main Main { get; set; }
+        [JsonProperty("wind")]
+        public Wind Wind { get; set; }
+        [JsonProperty("clouds")]
+        public Clouds Clouds { get; set; }
+        [JsonProperty("dt")]
+        public int DT { get; set; }
+        [JsonProperty("sys")]
+        public Sys Sys { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("cod")]
+        public int Cod { get; set; }
+        [JsonProperty("errorMsg")]
+        public string ErrorMsg { get; set; }
         public DateTime datetime(int date)
         {
             // Unix timestamp is seconds past epoch

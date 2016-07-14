@@ -6,36 +6,36 @@
 
 <h2><img src="https://www.mikeafford.com/store/store-images/tv03_example_light_rain_showers.png" width="50" height="50">7 Days Weather Forecast</h2>
 <hr />
-@{ if (Model.errorMsg == null && Model.cod != 404)
+@{ if (Model.ErrorMsg == null && Model.Cod != 404)
     {
     <div>
-        <h3><img src=@Model.city.flagURL height="25" width="45"> @Model.city.name.ToString()</h3>
+        <h3><img src=@Model.City.FlagURL height="25" width="45"> @Model.City.Name.ToString()</h3>
         <p>@Html.ActionLink("Back to List", "Index")</p>
         <hr />        
         <table margin="auto" border="0">
             <tr>
                 <th></th>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <th>@p.datetime().ToString("d")</th>
                 }
             </tr>
             <tr>
                 <th></th>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <th>@p.datetime().DayOfWeek</th>
                 }
             </tr>
             <tr>
                 <td></td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @foreach (var o in p.weather)
+                        @foreach (var o in p.Weather)
                         {
-                            @o.main<br>
-                            <img src= @o.icoURL>
+                            @o.Main<br>
+                            <img src= @o.IcoURL>
                         }
                     </td>
                 }
@@ -44,10 +44,10 @@
                 <td>
                      Day
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.day&deg
+                        @p.Temp.Day&deg
                     </td>
                 }
             </tr>
@@ -55,10 +55,10 @@
                 <td>
                     Min
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.min&deg
+                        @p.Temp.Min&deg
                     </td>
                 }
             </tr>
@@ -66,10 +66,10 @@
                 <td>
                     Max
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.max&deg
+                        @p.Temp.Max&deg
                     </td>
                 }
             </tr>
@@ -77,10 +77,10 @@
                 <td>
                     Eve
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.eve&deg
+                        @p.Temp.Eve&deg
                     </td>
                 }
             </tr>
@@ -88,10 +88,10 @@
                 <td>
                     Morning
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.morn&deg
+                        @p.Temp.Morn&deg
                     </td>
                 }
             </tr>
@@ -99,17 +99,17 @@
                 <td>
                     Night
                 </td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.temp.night&deg
+                        @p.Temp.Night&deg
                     </td>
                 }
             </tr>
 
             <tr>
                 <td></td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
                         ------------
@@ -119,65 +119,65 @@
 
             <tr>
                 <td>Cloudiness</td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.clouds
+                        @p.Clouds
                     </td>
                 }
             </tr>
         
             <tr>
                 <td>Humidity</td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.humidity %
+                        @p.Humidity %
                     </td>
                 }
             </tr>
 
             <tr>
                 <td>Pressure</td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.pressure hPa
+                        @p.Pressure hPa
                     </td>
                 }
             </tr>
 
             <tr>
                 <td>Rain</td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.rain
+                        @p.Rain
                     </td>
                 }
             </tr>
 
             <tr>
                 <td>Speed</td>
-                @foreach (var p in Model.list)
+                @foreach (var p in Model.List)
                 {
                     <td>
-                        @p.speed mps
+                        @p.Speed mps
                     </td>
                 }
             </tr>
         </table>
         <p>
-            <b>ID:</b> @Model.city.id
+            <b>ID:</b> @Model.City.Id
         </p>
         <p>
-            <b>Country:</b> @Model.city.country
+            <b>Country:</b> @Model.City.Country
         </p>
         <p>
-            <b>Population:</b> @Model.city.population
+            <b>Population:</b> @Model.City.Population
         </p>
         <p>
-            <b>Coordinates:</b> longitude - @Model.city.coord.lon; latitude - @Model.city.coord.lat
+            <b>Coordinates:</b> longitude - @Model.City.Coord.Lon; latitude - @Model.City.Coord.Lat
         </p>
         <hr />
     </div>
@@ -188,7 +188,7 @@
             <h4>ERROR!</h4>
             <p>@Html.ActionLink("Back to List", "Index")</p>
             <hr />
-            <h6>Have some problems... @Model.errorMsg</h6>
+            <h6>Have some problems... @Model.ErrorMsg</h6>
         </div>
     }
 }

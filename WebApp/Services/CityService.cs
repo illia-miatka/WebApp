@@ -21,11 +21,11 @@ namespace WebApp.Services
         public CityService()
         {
             cityList = new List<City>();
-            cityList.Add(new City { name = "Kiev" });
-            cityList.Add(new City { name = "Lviv" });
-            cityList.Add(new City { name = "Dnipropetrovsk" });
-            cityList.Add(new City { name = "Kharkiv" });
-            cityList.Add(new City { name = "Odessa" });
+            cityList.Add(new City { Name = "Kiev" });
+            cityList.Add(new City { Name = "Lviv" });
+            cityList.Add(new City { Name = "Dnipropetrovsk" });
+            cityList.Add(new City { Name = "Kharkiv" });
+            cityList.Add(new City { Name = "Odessa" });
         }
 
         public City GetNew()

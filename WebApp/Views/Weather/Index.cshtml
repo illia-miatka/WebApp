@@ -18,11 +18,11 @@
 {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @Html.DisplayFor(modelItem => item.Name)
         <td>
-            @Html.ActionLink("Day", "GetWeatherDay", new { city = item.name}) |
-            @Html.ActionLink("3 Days", "GetWeather3Days", new { city = item.name}) |
-            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = item.name})
+            @Html.ActionLink("Day", "GetWeatherDay", new { city = item.Name}) |
+            @Html.ActionLink("3 Days", "GetWeather3Days", new { city = item.Name}) |
+            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = item.Name})
         </td>
     </tr>
 }

@@ -34,21 +34,25 @@ namespace WebApp.Services
                 {
                     string response = webClient.DownloadString(request);
                     var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
-                    r.city.flagURL = GetFlag(r.city.country);
-                    foreach (var p in r.list)
+                    r.City.FlagURL = GetFlag(r.City.Country);
+                    foreach (var p in r.List)
                     {
-                        foreach (var f in p.weather)
-                            f.icoURL = GetWeatherIco(f.icon);
+                        foreach (var f in p.Weather)
+                            f.IcoURL = GetWeatherIco(f.Icon);
                     }
                     return r;
                 }
                 catch (Exception ex)
                 {
-                    return new Models.Weather.RootObject { errorMsg = ex.Message};
+                    return new Models.Weather.RootObject { ErrorMsg = ex.Message};
+                }
+                finally
+                {
+                    webClient.Dispose();
                 }
             }
 
-            return new Models.Weather.RootObject { errorMsg = "No City!" }; ;
+            return new Models.Weather.RootObject { ErrorMsg = "No City!" }; ;
 
         }
 
@@ -63,20 +67,24 @@ namespace WebApp.Services
                 {
                     string response = webClient.DownloadString(request);
                     var r = JsonConvert.DeserializeObject<Models.WeatherNow.RootObject>(response);
-                    r.sys.flagURL = GetFlag(r.sys.country);
-                    foreach (var p in r.weather)
+                    r.Sys.FlagURL = GetFlag(r.Sys.Country);
+                    foreach (var p in r.Weather)
                     {
-                        p.icoURL = GetWeatherIco(p.icon);
+                        p.IcoURL = GetWeatherIco(p.Icon);
                     }
                     return r;
                 }
                 catch (Exception ex)
                 {
-                    return new Models.WeatherNow.RootObject { errorMsg = ex.Message };
+                    return new Models.WeatherNow.RootObject { ErrorMsg = ex.Message };
+                }
+                finally
+                {
+                    webClient.Dispose();
                 }
             }
 
-            return new Models.WeatherNow.RootObject { errorMsg = "No City!" }; ;
+            return new Models.WeatherNow.RootObject { ErrorMsg = "No City!" }; ;
 
         }
 
@@ -103,11 +111,15 @@ namespace WebApp.Services
                 {
                     string response = webClient.DownloadString(request);
                     var r = JsonConvert.DeserializeObject<Models.WeatherNow.RootObject>(response);
-                    return r.name.ToString();
+                    return r.Name.ToString();
                 }
                 catch (Exception)
                 {
                     return "Bad city!";
+                }
+                finally
+                {
+                    webClient.Dispose();
                 }
             }
 

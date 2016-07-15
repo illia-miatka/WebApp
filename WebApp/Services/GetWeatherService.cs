@@ -9,11 +9,9 @@ namespace WebApp.Services
     public interface IGetWeather
     {
         Models.Weather.RootObject GetWeather(string city, int days);
-        Models.WeatherNow.RootObject GetWeather(string city);
         string GetWeatherIco(string code);
         string GetFlag(string code);
         string CheckCity(string city);
-
     }
     public class GetWeatherService : IGetWeather
     {
@@ -27,24 +25,48 @@ namespace WebApp.Services
         {
             if (city != null)
             {
-                var request = string.Format(connection, city, apikey, days);
+                string connectionstr;
+                if (days == 1)
+                { connectionstr = connectionOne; }
+                else
+                { connectionstr = connection; }
+                var request = string.Format(connectionstr, city, apikey, days);
                 System.Net.WebClient webClient = new System.Net.WebClient();
-                
+
                 try
                 {
                     string response = webClient.DownloadString(request);
                     var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
-                    r.City.FlagURL = GetFlag(r.City.Country);
-                    foreach (var p in r.List)
+                    if (days == 1)
                     {
-                        foreach (var f in p.Weather)
-                            f.IcoURL = GetWeatherIco(f.Icon);
+                        r.Sys.FlagURL = GetFlag(r.Sys.Country);
+                        foreach (var p in r.Weather)
+                        {
+                            p.IcoURL = GetWeatherIco(p.Icon);
+                        }
+                    }
+                    else
+                    {
+                        r.Name = r.City.Name;
+                        r.City.FlagURL = GetFlag(r.City.Country);
+                        foreach (var p in r.List)
+                        {
+                            foreach (var f in p.Weather)
+                                f.IcoURL = GetWeatherIco(f.Icon);
+                        }
+                    }
+
+                    using (WeatherContext db = new WeatherContext())
+                    {
+                        r.Modified = DateTime.Now;
+                        db.RootObjects.Add(r);
+                        db.SaveChanges();
                     }
                     return r;
                 }
                 catch (Exception ex)
                 {
-                    return new Models.Weather.RootObject { ErrorMsg = ex.Message};
+                    return new Models.Weather.RootObject { ErrorMsg = ex.Message };
                 }
                 finally
                 {
@@ -56,7 +78,7 @@ namespace WebApp.Services
 
         }
 
-        public Models.WeatherNow.RootObject GetWeather(string city)
+        /*public Models.Weather.RootObject GetWeather(string city)
         {
             if (city != null)
             {
@@ -66,7 +88,7 @@ namespace WebApp.Services
                 try
                 {
                     string response = webClient.DownloadString(request);
-                    var r = JsonConvert.DeserializeObject<Models.WeatherNow.RootObject>(response);
+                    var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
                     r.Sys.FlagURL = GetFlag(r.Sys.Country);
                     foreach (var p in r.Weather)
                     {
@@ -76,7 +98,7 @@ namespace WebApp.Services
                 }
                 catch (Exception ex)
                 {
-                    return new Models.WeatherNow.RootObject { ErrorMsg = ex.Message };
+                    return new Models.Weather.RootObject { ErrorMsg = ex.Message };
                 }
                 finally
                 {
@@ -84,9 +106,9 @@ namespace WebApp.Services
                 }
             }
 
-            return new Models.WeatherNow.RootObject { ErrorMsg = "No City!" }; ;
+            return new Models.Weather.RootObject { ErrorMsg = "No City!" }; ;
 
-        }
+        }*/
 
         public string GetWeatherIco(string code)
         {
@@ -110,7 +132,7 @@ namespace WebApp.Services
                 try
                 {
                     string response = webClient.DownloadString(request);
-                    var r = JsonConvert.DeserializeObject<Models.WeatherNow.RootObject>(response);
+                    var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
                     return r.Name.ToString();
                 }
                 catch (Exception)

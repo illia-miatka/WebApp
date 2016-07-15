@@ -1,0 +1,40 @@
+﻿@model List<WebApp.Models.Weather.RootObject>
+@{
+    ViewBag.Title = "History";
+}
+
+<h2><img src="https://www.mikeafford.com/store/store-images/tv03_example_light_rain_showers.png" width="50" height="50">History</h2>
+<p>@Html.ActionLink("Back to List", "Index")</p>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            City
+        </th>
+        <th>
+            DateTime
+        </th>
+        <th>
+            DaysForecast
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modified)
+            </td>
+            <td>
+                @{ if (item.Cnt == 0)
+                    { item.Cnt = 1; }
+                }
+                @Html.DisplayFor(modelItem => item.Cnt) 
+            </td>
+        </tr>
+                    }
+</table>
+

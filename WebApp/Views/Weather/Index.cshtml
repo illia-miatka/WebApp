@@ -5,7 +5,9 @@
 }
 
 <h2><img src="https://www.mikeafford.com/store/store-images/tv03_example_light_rain_showers.png" width="50" height="50">Weather</h2>
-<br>
+
+@Html.ActionLink("History", "History")
+<br><br>
 <table class="table">
     <tr>
         <th>
@@ -22,7 +24,8 @@
         <td>
             @Html.ActionLink("Day", "GetWeatherDay", new { city = item.Name}) |
             @Html.ActionLink("3 Days", "GetWeather3Days", new { city = item.Name}) |
-            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = item.Name})
+            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = item.Name}) | | | 
+            @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = item.Name})
         </td>
     </tr>
 }
@@ -34,5 +37,6 @@
     {
         @Html.Label("Search: ")
         @Html.TextBox("txtName", null, new { @style = "width: 300px; color: black;" })
+
     }
 </div>

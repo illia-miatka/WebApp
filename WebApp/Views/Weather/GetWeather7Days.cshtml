@@ -10,7 +10,7 @@
     {
     <div>
         <h3><img src=@Model.City.FlagURL height="25" width="45"> @Model.City.Name.ToString()</h3>
-        <p>@Html.ActionLink("Back to List", "Index")</p>
+        <p>@Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Add To Favorites", "AddCity", Model.City) | @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = Model.City.Name })</p>
         <hr />        
         <table margin="auto" border="0">
             <tr>
@@ -167,9 +167,6 @@
                 }
             </tr>
         </table>
-        <p>
-            <b>ID:</b> @Model.City.Id
-        </p>
         <p>
             <b>Country:</b> @Model.City.Country
         </p>

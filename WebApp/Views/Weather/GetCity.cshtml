@@ -22,7 +22,8 @@
         <td>
             @Html.ActionLink("Day", "GetWeatherDay", new { city = Model.Name }) |
             @Html.ActionLink("3 Days", "GetWeather3Days", new { city = Model.Name }) |
-            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = Model.Name })
+            @Html.ActionLink("7 Days", "GetWeather7Days", new { city = Model.Name }) | | | 
+            @Html.ActionLink("Add To Favorites", "AddCity", Model)
         </td>
     </tr>
 </table>

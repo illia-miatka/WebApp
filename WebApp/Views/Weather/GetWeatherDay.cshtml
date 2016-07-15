@@ -1,4 +1,4 @@
-﻿@model WebApp.Models.WeatherNow.RootObject
+﻿@model WebApp.Models.Weather.RootObject
 
 @{
     ViewBag.Title = "Weather";
@@ -25,7 +25,7 @@
                 @Model.datetime(@Model.Sys.Sunset).ToString("t")
             </h4>
         }
-        <p>@Html.ActionLink("Back to List", "Index")</p>
+        <p>@Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Add To Favorites", "AddCity", new WebApp.Models.Weather.City{ Name = Model.Name, Coord = Model.Coord, Country = Model.Sys.Country, FlagURL = Model.Sys.FlagURL }) | @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = Model.Name })</p>
         <hr />
                 
         <h4>Main</h4>

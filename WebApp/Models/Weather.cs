@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApp.Models.Weather
@@ -32,7 +28,7 @@ namespace WebApp.Models.Weather
         [JsonProperty("population")]
         public int Population { get; set; }
         [JsonProperty("flagURL")]
-        public string FlagURL { get; set; }
+        public string FlagUrl { get; set; }
     }
 
     public class Temp
@@ -64,7 +60,7 @@ namespace WebApp.Models.Weather
         [JsonProperty("icon")]
         public string Icon { get; set; }
         [JsonProperty("icoURL")]
-        public string IcoURL { get; set; }
+        public string IcoUrl { get; set; }
 
     }
 
@@ -73,7 +69,7 @@ namespace WebApp.Models.Weather
         [JsonProperty("id")]
         public int Id { get; set; }
         [JsonProperty("dt")]
-        public int DT { get; set; }
+        public int Dt { get; set; }
         [JsonProperty("temp")]
         public Temp Temp { get; set; }
         [JsonProperty("pressure")]
@@ -90,11 +86,11 @@ namespace WebApp.Models.Weather
         public int Clouds { get; set; }
         [JsonProperty("rain")]
         public double Rain { get; set; }
-        public DateTime datetime()
+        public DateTime Datetime()
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(DT).ToLocalTime();
+            dtDateTime = dtDateTime.AddSeconds(Dt).ToLocalTime();
             return dtDateTime;
         }
     }
@@ -110,9 +106,9 @@ namespace WebApp.Models.Weather
         [JsonProperty("humidity")]
         public double Humidity { get; set; }
         [JsonProperty("temp_min")]
-        public double Temp_min { get; set; }
+        public double TempMin { get; set; }
         [JsonProperty("temp_max")]
-        public double Temp_max { get; set; }
+        public double TempMax { get; set; }
     }
 
     public class Wind
@@ -149,7 +145,7 @@ namespace WebApp.Models.Weather
         [JsonProperty("sunset")]
         public int Sunset { get; set; }
         [JsonProperty("flagURL")]
-        public string FlagURL { get; set; }
+        public string FlagUrl { get; set; }
     }
 
     public class RootObject
@@ -182,13 +178,13 @@ namespace WebApp.Models.Weather
         [JsonProperty("clouds")]
         public Clouds Clouds { get; set; }
         [JsonProperty("dt")]
-        public int DT { get; set; }
+        public int Dt { get; set; }
         [JsonProperty("sys")]
         public Sys Sys { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         public DateTime Modified { get; set; }
-        public DateTime datetime(int date)
+        public DateTime Datetime(int date)
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);

@@ -16,16 +16,16 @@ namespace WebApp.Services
 
     public class CityService : ICity
     {
-        private static List<City> cityList;
+        private static List<City> _cityList;
         
         public CityService()
         {
-            cityList = new List<City>();
-            cityList.Add(new City { Name = "Kiev" });
-            cityList.Add(new City { Name = "Lviv" });
-            cityList.Add(new City { Name = "Dnipropetrovsk" });
-            cityList.Add(new City { Name = "Kharkiv" });
-            cityList.Add(new City { Name = "Odessa" });
+            _cityList = new List<City>();
+            _cityList.Add(new City { Name = "Kiev" });
+            _cityList.Add(new City { Name = "Lviv" });
+            _cityList.Add(new City { Name = "Dnipropetrovsk" });
+            _cityList.Add(new City { Name = "Kharkiv" });
+            _cityList.Add(new City { Name = "Odessa" });
         }
 
         public City GetNew()
@@ -33,7 +33,7 @@ namespace WebApp.Services
 
         public List<City> GetAll()
         {
-            return cityList;
+            return _cityList;
         }
 
 

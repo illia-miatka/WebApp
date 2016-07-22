@@ -2,71 +2,71 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
+using WebApp.Models.Weather;
 
 namespace WebApp.Services
 {
     public interface IGetWeather
     {
-        Models.Weather.RootObject GetWeather(string city, int days);
-        string GetWeatherIco(string code);
+        Task<RootObject> GetWeather(string city, int days);
         string GetFlag(string code);
-        string CheckCity(string city);
+        Task<string> CheckCity(string city);
     }
     public class GetWeatherService : IGetWeather
     {
-        private const string connection = "http://api.openweathermap.org/data/2.5/forecast/daily?q={0}&units=metric&cnt={2}&APPID={1}";
-        private const string connectionOne = "http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&APPID={1}";
-        private const string apikey = "1108d8304b12b6e64212f71a9bb28d78";
-        private const string icoURL = "http://openweathermap.org/img/w/{0}.png";
-        private const string flagURL = "http://www.geonames.org/flags/x/{0}.gif";
+        private const string Connection = "http://api.openweathermap.org/data/2.5/forecast/daily?q={0}&units=metric&cnt={2}&APPID={1}";
+        private const string ConnectionOne = "http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&APPID={1}";
+        private const string Apikey = "1108d8304b12b6e64212f71a9bb28d78";
+        private const string IcoUrl = "http://openweathermap.org/img/w/{0}.png";
+        private const string FlagUrl = "http://www.geonames.org/flags/x/{0}.gif";
 
-        public Models.Weather.RootObject GetWeather(string city, int days)
+        public async Task<RootObject> GetWeather(string city, int days)
         {
             if (city != null)
             {
                 string connectionstr;
                 if (days == 1)
-                { connectionstr = connectionOne; }
+                { connectionstr = ConnectionOne; }
                 else
-                { connectionstr = connection; }
-                var request = string.Format(connectionstr, city, apikey, days);
+                { connectionstr = Connection; }
+                var request = string.Format(connectionstr, city, Apikey, days);
                 System.Net.WebClient webClient = new System.Net.WebClient();
 
                 try
                 {
-                    string response = webClient.DownloadString(request);
+                    string response = await webClient.DownloadStringTaskAsync(request);
                     var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
                     if (days == 1)
                     {
-                        r.Sys.FlagURL = GetFlag(r.Sys.Country);
+                        r.Sys.FlagUrl = GetFlag(r.Sys.Country);
                         foreach (var p in r.Weather)
                         {
-                            p.IcoURL = GetWeatherIco(p.Icon);
+                            p.IcoUrl = GetWeatherIco(p.Icon);
                         }
                     }
                     else
                     {
                         r.Name = r.City.Name;
-                        r.City.FlagURL = GetFlag(r.City.Country);
+                        r.City.FlagUrl = GetFlag(r.City.Country);
                         foreach (var p in r.List)
                         {
                             foreach (var f in p.Weather)
-                                f.IcoURL = GetWeatherIco(f.Icon);
+                                f.IcoUrl = GetWeatherIco(f.Icon);
                         }
                     }
 
                     using (WeatherContext db = new WeatherContext())
                     {
                         r.Modified = DateTime.Now;
-                        db.RootObjects.Add(r);
-                        db.SaveChanges();
+                        await db.RootObjects_AddRoot(r);
                     }
                     return r;
                 }
                 catch (Exception ex)
                 {
-                    return new Models.Weather.RootObject { ErrorMsg = ex.Message };
+                    return new RootObject { ErrorMsg = ex.Message };
                 }
                 finally
                 {
@@ -78,62 +78,30 @@ namespace WebApp.Services
 
         }
 
-        /*public Models.Weather.RootObject GetWeather(string city)
+        string GetWeatherIco(string code)
         {
-            if (city != null)
-            {
-                var request = string.Format(connectionOne, city, apikey);
-                System.Net.WebClient webClient = new System.Net.WebClient();
-
-                try
-                {
-                    string response = webClient.DownloadString(request);
-                    var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
-                    r.Sys.FlagURL = GetFlag(r.Sys.Country);
-                    foreach (var p in r.Weather)
-                    {
-                        p.IcoURL = GetWeatherIco(p.Icon);
-                    }
-                    return r;
-                }
-                catch (Exception ex)
-                {
-                    return new Models.Weather.RootObject { ErrorMsg = ex.Message };
-                }
-                finally
-                {
-                    webClient.Dispose();
-                }
-            }
-
-            return new Models.Weather.RootObject { ErrorMsg = "No City!" }; ;
-
-        }*/
-
-        public string GetWeatherIco(string code)
-        {
-            var request = string.Format(icoURL, code);
+            var request = string.Format(IcoUrl, code);
             return request;
         }
 
         public string GetFlag(string code)
         {
-            var request = string.Format(flagURL, code.ToLower());
+            var request = string.Format(FlagUrl, code.ToLower());
             return request;
         }
 
-        public string CheckCity(string city)
+        public async Task<string> CheckCity(string city)
         {
             if (city != null)
             {
-                var request = string.Format(connectionOne, city, apikey);
+                var request = string.Format(ConnectionOne, city, Apikey);
                 System.Net.WebClient webClient = new System.Net.WebClient();
 
                 try
                 {
-                    string response = webClient.DownloadString(request);
-                    var r = JsonConvert.DeserializeObject<Models.Weather.RootObject>(response);
-                    return r.Name.ToString();
+                    string response = await webClient.DownloadStringTaskAsync(request);
+                    var r = JsonConvert.DeserializeObject<RootObject>(response);
+                    return r.Name;
                 }
                 catch (Exception)
                 {
@@ -147,5 +115,6 @@ namespace WebApp.Services
 
             return "No City!";
         }
+
     }
 }

@@ -9,7 +9,7 @@
 @{ if (Model.ErrorMsg == null && Model.Cod != 404)
     {
     <div>
-        <h3><img src=@Model.City.FlagURL height="25" width="45"> @Model.City.Name.ToString()</h3>
+        <h3><img src=@Model.City.FlagUrl height="25" width="45"> @Model.City.Name.ToString()</h3>
         <p>@Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Add To Favorites", "AddCity", Model.City) | @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = Model.City.Name })</p>
         <hr />        
         <table margin="auto" border="0">
@@ -17,14 +17,14 @@
                 <th></th>
                 @foreach (var p in Model.List)
                 {
-                    <th>@p.datetime().ToString("d")</th>
+                    <th>@p.Datetime().ToString("d")</th>
                 }
             </tr>
             <tr>
                 <th></th>
                 @foreach (var p in Model.List)
                 {
-                    <th>@p.datetime().DayOfWeek</th>
+                    <th>@p.Datetime().DayOfWeek</th>
                 }
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                         @foreach (var o in p.Weather)
                         {
                             @o.Main<br>
-                            <img src= @o.IcoURL>
+                            <img src= @o.IcoUrl>
                         }
                     </td>
                 }

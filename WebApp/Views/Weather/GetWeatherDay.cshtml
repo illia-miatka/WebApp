@@ -10,22 +10,22 @@
     {
     <div>
         <h3>
-        <img src=@Model.Sys.FlagURL height="25" width="45">
+        <img src=@Model.Sys.FlagUrl height="25" width="45">
         @Model.Name.ToString()
         </h3>
         <h1>@Html.DisplayFor(model => model.Main.Temp)&degC</h1>
          @foreach (var p in Model.Weather)
         {
             <h4>@foreach (var k in Model.Weather)
-                { <img src=@k.IcoURL> }
+                { <img src=@k.IcoUrl> }
                 @p.Main       
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Weather-Sunrise-icon.png" height="30" width="30">
-                @Model.datetime(@Model.Sys.Sunrise).ToString("t")
+                @Model.Datetime(@Model.Sys.Sunrise).ToString("t")
                 <img src="http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Sunset-icon.png" height="30" width="30">
-                @Model.datetime(@Model.Sys.Sunset).ToString("t")
+                @Model.Datetime(@Model.Sys.Sunset).ToString("t")
             </h4>
         }
-        <p>@Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Add To Favorites", "AddCity", new WebApp.Models.Weather.City{ Name = Model.Name, Coord = Model.Coord, Country = Model.Sys.Country, FlagURL = Model.Sys.FlagURL }) | @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = Model.Name })</p>
+        <p>@Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Add To Favorites", "AddCity", new WebApp.Models.Weather.City{ Name = Model.Name, Coord = Model.Coord, Country = Model.Sys.Country, FlagUrl = Model.Sys.FlagUrl }) | @Html.ActionLink("Delete From Favorites", "DeleteCity", new { city = Model.Name })</p>
         <hr />
                 
         <h4>Main</h4>
@@ -44,7 +44,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.Main.Temp_min)&degC
+                 @Html.DisplayFor(model => model.Main.TempMin)&degC
              </dd>
 
              <dt>
@@ -52,7 +52,7 @@
              </dt>
 
              <dd>
-                 @Html.DisplayFor(model => model.Main.Temp_max)&degC
+                 @Html.DisplayFor(model => model.Main.TempMax)&degC
              </dd>
 
              <dt>

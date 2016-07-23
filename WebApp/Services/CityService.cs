@@ -20,12 +20,14 @@ namespace WebApp.Services
         
         public CityService()
         {
-            _cityList = new List<City>();
-            _cityList.Add(new City { Name = "Kiev" });
-            _cityList.Add(new City { Name = "Lviv" });
-            _cityList.Add(new City { Name = "Dnipropetrovsk" });
-            _cityList.Add(new City { Name = "Kharkiv" });
-            _cityList.Add(new City { Name = "Odessa" });
+            _cityList = new List<City>
+            {
+                new City {Name = "Kiev"},
+                new City {Name = "Lviv"},
+                new City {Name = "Dnipropetrovsk"},
+                new City {Name = "Kharkiv"},
+                new City {Name = "Odessa"}
+            };
         }
 
         public City GetNew()

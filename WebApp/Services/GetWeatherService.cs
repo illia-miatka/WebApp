@@ -26,11 +26,7 @@ namespace WebApp.Services
         {
             if (city != null)
             {
-                string connectionstr;
-                if (days == 1)
-                { connectionstr = ConnectionOne; }
-                else
-                { connectionstr = Connection; }
+                var connectionstr = days == 1 ? ConnectionOne : Connection;
                 var request = string.Format(connectionstr, city, Apikey, days);
                 System.Net.WebClient webClient = new System.Net.WebClient();
 
@@ -78,7 +74,7 @@ namespace WebApp.Services
 
         }
 
-        string GetWeatherIco(string code)
+        private string GetWeatherIco(string code)
         {
             var request = string.Format(IcoUrl, code);
             return request;
@@ -92,28 +88,24 @@ namespace WebApp.Services
 
         public async Task<string> CheckCity(string city)
         {
-            if (city != null)
+            if (city == null) return "No City!";
+            var request = string.Format(ConnectionOne, city, Apikey);
+            System.Net.WebClient webClient = new System.Net.WebClient();
+
+            try
             {
-                var request = string.Format(ConnectionOne, city, Apikey);
-                System.Net.WebClient webClient = new System.Net.WebClient();
-
-                try
-                {
-                    string response = await webClient.DownloadStringTaskAsync(request);
-                    var r = JsonConvert.DeserializeObject<RootObject>(response);
-                    return r.Name;
-                }
-                catch (Exception)
-                {
-                    return "Bad city!";
-                }
-                finally
-                {
-                    webClient.Dispose();
-                }
+                string response = await webClient.DownloadStringTaskAsync(request);
+                var r = JsonConvert.DeserializeObject<RootObject>(response);
+                return r.Name;
             }
-
-            return "No City!";
+            catch (Exception)
+            {
+                return "Bad city!";
+            }
+            finally
+            {
+                webClient.Dispose();
+            }
         }
 
     }
